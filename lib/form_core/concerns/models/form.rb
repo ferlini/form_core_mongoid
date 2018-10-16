@@ -9,7 +9,6 @@ module FormCore::Concerns
                            fields_scope: proc { |fields| fields },
                            overrides: {})
         model = FormCore.virtual_model_class.build model_name
-
         append_to_virtual_model(model, fields_scope: fields_scope, overrides: overrides)
       end
 
@@ -17,9 +16,8 @@ module FormCore::Concerns
                                   fields_scope: proc { |fields| fields },
                                   overrides: {})
         check_model_validity! model
-
         global_overrides = overrides.fetch(:_global, {})
-        fields_scope.call(fields).each do |f|
+        fields_scope.call(form_fields).each do |f|
           f.interpret_to model, overrides: global_overrides.merge(overrides.fetch(f.name, {}))
         end
 

@@ -2,8 +2,8 @@
 
 module Fields
   class TextField < Field
-    serialize :validations, Validations::TextField
-    serialize :options, Options::TextField
+    field :validations, type: Validations::TextField
+    field :options, type: Fields::Options::TextField
 
     def stored_type
       :string

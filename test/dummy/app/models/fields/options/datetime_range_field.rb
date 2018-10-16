@@ -137,9 +137,6 @@ module Fields::Options
                           type: :datetime
                         },
                         allow_blank: true
-        klass.default_value_for :start,
-                                -> (_) { Time.zone.now.change(sec: 0, usec: 0) + start_minutes_offset },
-                                allow_nil: false
         if fixed_start
           klass.attr_readonly :start
         end
@@ -150,9 +147,6 @@ module Fields::Options
                           type: :datetime
                         },
                         allow_blank: true
-        klass.default_value_for :start,
-                                start,
-                                allow_nil: false
         if fixed_start
           klass.attr_readonly :start
         end
@@ -175,9 +169,6 @@ module Fields::Options
                           type: :datetime
                         },
                         allow_blank: true
-        klass.default_value_for :finish,
-                                -> (_) { Time.zone.now.change(sec: 0, usec: 0) + finish_minutes_offset },
-                                allow_nil: false
         if fixed_finish
           klass.attr_readonly :finish
         end
@@ -188,9 +179,6 @@ module Fields::Options
                           type: :datetime
                         },
                         allow_blank: true
-        klass.default_value_for :finish,
-                                finish,
-                                allow_nil: false
         if fixed_finish
           klass.attr_readonly :finish
         end

@@ -2,8 +2,8 @@
 
 module Fields
   class ResourceSelectField < Field
-    serialize :options, Options::ResourceSelectField
-    serialize :validations, Validations::ResourceSelectField
+    field :options, type: Options::ResourceSelectField
+    field :validations, type: Validations::ResourceSelectField
 
     def stored_type
       :string

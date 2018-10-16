@@ -2,8 +2,8 @@
 
 module Fields
   class MultipleResourceSelectField < Field
-    serialize :validations, Validations::MultipleResourceSelectField
-    serialize :options, Options::MultipleResourceSelectField
+    field :validations, type: Validations::MultipleResourceSelectField
+    field :options, type: Options::MultipleResourceSelectField
 
     def stored_type
       :string

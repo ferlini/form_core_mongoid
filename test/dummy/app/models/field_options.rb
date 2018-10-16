@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class FieldOptions < DuckRecord::Base
-  include FormCore::ActsAsDefaultValue
   include EnumAttributeLocalizable
 
   class_attribute :keeping_old_serialization
@@ -11,9 +10,32 @@ class FieldOptions < DuckRecord::Base
   def interpret_to(_model, _field_name, _accessibility, _options = {})
   end
 
-  def serializable_hash(options = {})
-    options = (options || {}).reverse_merge include: self.class._embeds_reflections.keys
-    super options
+  # def serializable_hash(options = {})
+  #   options = (options || {}).reverse_merge include: self.class._embeds_reflections.keys
+  #   super options
+  # end
+
+  def mongoize(options = {})
+    self.attributes
+  end
+
+  class << self
+    def demongoize(object)
+      return object unless object.is_a?(Hash)
+      clazz = self.new
+      object.slice(_embeds_reflections.keys).each do |k, v|
+        clazz._assign_attribute(k, v)
+      end
+      clazz
+    end
+
+    # Takes any possible object and converts it to how it would be
+    # stored in the database.
+    def mongoize(object)
+      # raise ArgumentError, "object must be Hash" unless object.is_a?(Hash)
+      return object if object.is_a?(Hash)
+      object.attributes
+    end
   end
 
   private
@@ -36,25 +58,25 @@ class FieldOptions < DuckRecord::Base
       "#{self}.#{model_version}"
     end
 
-    def dump(obj)
-      return YAML.dump({}) unless obj
+    # def dump(obj)
+    #   return YAML.dump({}) unless obj
 
-      serializable_hash =
-        if obj.respond_to?(:serializable_hash)
-          obj.serializable_hash
-        elsif obj.respond_to?(:to_hash)
-          obj.to_hash
-        else
-          raise ArgumentError, "`obj` required can be cast to `Hash` -- #{obj.class}"
-        end.stringify_keys
+    #   serializable_hash =
+    #     if obj.respond_to?(:serializable_hash)
+    #       obj.serializable_hash
+    #     elsif obj.respond_to?(:to_hash)
+    #       obj.to_hash
+    #     else
+    #       raise ArgumentError, "`obj` required can be cast to `Hash` -- #{obj.class}"
+    #     end.stringify_keys
 
-      data = {root_key_for_serialization => serializable_hash}
-      if keeping_old_serialization
-        data.reverse_merge! obj.raw_attributes
-      end
+    #   data = {root_key_for_serialization => serializable_hash}
+    #   if keeping_old_serialization
+    #     data.reverse_merge! obj.raw_attributes
+    #   end
 
-      YAML.dump(data)
-    end
+    #   YAML.dump(data)
+    # end
 
     def load(yaml_or_hash)
       case yaml_or_hash

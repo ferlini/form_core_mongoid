@@ -1,4 +1,4 @@
-<% fields = form.fields.map { |field| present(field, target: instance) }.reject(&:access_hidden?) %>
+<% fields = form.form_fields.map { |field| present(field, target: instance) }.reject(&:access_hidden?) %>
 <% return if fields.empty? %>
 
 <div class="nested-content">

@@ -23,12 +23,12 @@ en:
       form:
         name: Name
         description: Description
-        type: Type
+        _type: Type
       field:
         name: Name
         label: Label
         hint: Hint
-        type: Type
+        _type: Type
         accessibilities:
           hidden: Hidden
           readonly: Read-only

@@ -1,9 +1,14 @@
 # frozen_string_literal: true
 
 class Dictionary < ApplicationRecord
+
+  field :value, type: String
+  field :scope, type: String
+
   SCOPE_REGEX = /\A([a-z_][a-z_0-9]*\.)*[a-z_][a-z_0-9]*\z/
 
-  attribute :value, :string
+
+  # attribute :value, :string
   validates :value,
             presence: true, uniqueness: {scope: :scope}
 

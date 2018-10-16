@@ -8,8 +8,8 @@ module Fields
       build_nested_form.save!
     end
 
-    serialize :validations, Validations::MultipleNestedFormField
-    serialize :options, Options::MultipleNestedFormField
+    field :validations, type: Validations::MultipleNestedFormField
+    field :options, type: Options::MultipleNestedFormField
 
     def interpret_to(model, overrides: {})
       check_model_validity!(model)

@@ -14,9 +14,9 @@ class ApplicationController < ActionController::Base
   def current_time_zone
     @_current_time_zone ||=
       if session[:current_time_zone].present?
-        ActiveSupport::TimeZone[session[:current_time_zone]] || ActiveSupport::TimeZone["UTC"]
+        ActiveSupport::TimeZone[session[:current_time_zone]] || ActiveSupport::TimeZone["Beijing"]
       else
-        ActiveSupport::TimeZone["UTC"]
+        ActiveSupport::TimeZone["Beijing"]
       end
   end
 end

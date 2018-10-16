@@ -3,7 +3,9 @@
 class MetalForm < ApplicationRecord
   include FormCore::Concerns::Models::Form
 
-  self.table_name = "forms"
+  # field :type, type: String
+  field :title, type: String
+  field :description, type: String
 
-  has_many :fields, foreign_key: "form_id"
+  has_many :form_fields, class_name: 'Field'
 end

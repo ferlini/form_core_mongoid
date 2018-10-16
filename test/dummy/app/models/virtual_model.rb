@@ -4,7 +4,6 @@ require_dependency "concerns/enum_attribute_localizable"
 
 class VirtualModel < FormCore::VirtualModel
   include FormCore::ActiveStorageBridge::Attached::Macros
-  include FormCore::ActsAsDefaultValue
 
   include EnumAttributeLocalizable
 

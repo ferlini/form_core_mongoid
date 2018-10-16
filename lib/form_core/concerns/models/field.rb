@@ -8,11 +8,8 @@ module FormCore::Concerns
       NAME_REGEX = /\A[a-z][a-z_0-9]*\z/
 
       included do
-        enum accessibility: {read_and_write: 0, readonly: 1, hidden: 2},
+        enum :accessibility, [:read_and_write, :readonly, :hidden],
              _prefix: :access
-
-        serialize :validations
-        serialize :options
 
         validates :name,
                   presence: true,
@@ -20,7 +17,7 @@ module FormCore::Concerns
                   exclusion: {in: FormCore.reserved_names},
                   format: {with: NAME_REGEX}
         validates :accessibility,
-                  inclusion: {in: self.accessibilities.keys.map(&:to_sym)}
+                  inclusion: {in: self::ACCESSIBILITY.map(&:to_sym)}
 
         after_initialize do
           self.validations ||= {}

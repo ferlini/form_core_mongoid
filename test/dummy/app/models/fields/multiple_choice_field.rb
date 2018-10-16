@@ -2,8 +2,8 @@
 
 module Fields
   class MultipleChoiceField < Field
-    serialize :validations, Validations::MultipleChoiceField
-    serialize :options, Options::MultipleChoiceField
+    field :validations, type: Validations::MultipleChoiceField
+    field :options, type: Options::MultipleChoiceField
 
     def stored_type
       :integer

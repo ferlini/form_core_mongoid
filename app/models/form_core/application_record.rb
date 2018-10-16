@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 module FormCore
-  class ApplicationRecord < ActiveRecord::Base
-    self.abstract_class = true
+  class ApplicationRecord
+    # self.abstract_class = true
+    include Mongoid::Document
   end
 end

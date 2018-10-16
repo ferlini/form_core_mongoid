@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Form < MetalForm
-  has_many :sections, -> { order(position: :asc) }, dependent: :destroy
+  has_many :sections, dependent: :destroy
 
   validates :title,
             presence: true

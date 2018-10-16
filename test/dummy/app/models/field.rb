@@ -1,29 +1,33 @@
 # frozen_string_literal: true
 
 class Field < ApplicationRecord
+  include Mongoid::Enum
   include FormCore::Concerns::Models::Field
 
-  self.table_name = "fields"
+  field :name, type: String
+  field :accessibility, type: Integer
+  field :validations, type: Hash
+  field :options, type: Hash
+  field :label, type: String
+  field :hint, type: String
+  field :position, type: Integer
 
-  belongs_to :form, class_name: "MetalForm", foreign_key: "form_id", touch: true
+  belongs_to :form, class_name: "MetalForm"
 
-  belongs_to :section, touch: true, optional: true
+  belongs_to :section
 
-  has_many :choices, -> { order(position: :asc) }, dependent: :destroy, autosave: true
+  has_many :choices, dependent: :destroy, autosave: true
+  # has_many :choices, -> { order(position: :asc) }, dependent: :destroy, autosave: true
 
-  acts_as_list scope: [:section_id]
+  # acts_as_list scope: [:section_id]
 
   validates :label,
             presence: true
-  validates :type,
+  validates :_type,
             inclusion: {
               in: ->(_) { Field.descendants.map(&:to_s) }
             },
             allow_blank: false
-
-  default_value_for :name,
-                    -> (_) { "field_#{SecureRandom.hex(3)}" },
-                    allow_nil: false
 
   def self.type_key
     model_name.name.split("::").last.underscore

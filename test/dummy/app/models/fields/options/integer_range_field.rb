@@ -121,9 +121,6 @@ module Fields::Options
                         },
                         allow_blank: true
         if fixed_start
-          klass.default_value_for :start,
-                                  start_value,
-                                  allow_nil: false
           klass.attr_readonly :start
         end
       elsif start_from_offsets_before_finish?
@@ -141,9 +138,6 @@ module Fields::Options
                         },
                         allow_blank: true
         if fixed_finish
-          klass.default_value_for :finish,
-                                  finish_value,
-                                  allow_nil: false
           klass.attr_readonly :finish
         end
       elsif finish_to_offsets_since_start?

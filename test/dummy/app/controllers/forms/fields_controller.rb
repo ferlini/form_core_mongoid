@@ -5,12 +5,12 @@ class Forms::FieldsController < Forms::ApplicationController
 
   # GET /forms/1/fields
   def index
-    @fields = @form.fields.includes(:section).all
+    @fields = @form.form_fields.includes(:section).all
   end
 
   # GET /forms/fields/new
   def new
-    @field = @form.fields.build
+    @field = @form.form_fields.build
   end
 
   # GET /forms/1/fields/1/edit
@@ -19,7 +19,7 @@ class Forms::FieldsController < Forms::ApplicationController
 
   # POST /forms/1/fields
   def create
-    @field = @form.fields.build(field_params)
+    @field = @form.form_fields.build(field_params)
 
     if @field.save
       redirect_to form_fields_url(@form), notice: "Field was successfully created."
@@ -47,11 +47,11 @@ class Forms::FieldsController < Forms::ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_field
-    @field = @form.fields.find(params[:id])
+    @field = @form.form_fields.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.
   def field_params
-    params.fetch(:field, {}).permit(:name, :label, :hint, :section_id, :accessibility, :type)
+    params.fetch(:field, {}).permit(:name, :label, :hint, :section_id, :accessibility, :_type)
   end
 end

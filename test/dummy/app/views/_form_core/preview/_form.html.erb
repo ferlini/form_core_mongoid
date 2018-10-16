@@ -1,6 +1,6 @@
 <% title_tag ||= :h3 %>
 <% form.sections.each do |section| %>
-  <% fields = section.fields.map { |field| present(field, target: instance) }.reject(&:access_hidden?) %>
+  <% fields = section.form_fields.map { |field| present(field, target: instance) }.reject(&:access_hidden?) %>
   <% next if fields.empty? %>
 
   <% unless section.headless? %>

@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
-class ApplicationRecord < ActiveRecord::Base
-  self.abstract_class = true
+class ApplicationRecord
+  # self.abstract_class = true
 
-  include ActsAsDefaultValue
+  include Mongoid::Document
+  include Mongoid::Timestamps
   include EnumAttributeLocalizable
 end

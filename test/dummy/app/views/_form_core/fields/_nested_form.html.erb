@@ -11,7 +11,7 @@
           <% f.object.errors.messages.each do |name, messages| %>
             <% messages.each do |message| %>
               <li>
-                <%= "#{form.fields.select { |field| field.name == name}.first&.label } #{message}" %>
+                <%= "#{form.form_fields.select { |field| field.name == name}.first&.label } #{message}" %>
               </li>
             <% end %>
           <% end %>
@@ -20,7 +20,7 @@
     </article>
   <% end %>
 
-  <% form.fields.each do |field| %>
+  <% form.form_fields.each do |field| %>
     <% field = present(field, target: f.object) %>
     <% unless field.access_hidden? %>
       <%= render "_form_core/fields/#{field.type_key}", f: f, field: field %>

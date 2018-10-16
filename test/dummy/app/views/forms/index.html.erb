@@ -17,7 +17,7 @@
         <tr>
           <td><%= form.title %></td>
           <td><%= form.description %></td>
-          <td><%= form.updated_at %></td>
+          <td><%= form.try(:updated_at) %></td>
           <td>
             <%= link_to "Show", form_fields_path(form) %> |
             <%= link_to "Edit", edit_form_path(form) %> |

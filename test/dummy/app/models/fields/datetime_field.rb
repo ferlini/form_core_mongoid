@@ -2,8 +2,8 @@
 
 module Fields
   class DatetimeField < Field
-    serialize :validations, Validations::DatetimeField
-    serialize :options, Options::DatetimeField
+    # serialize :validations, Validations::DatetimeField
+    # serialize :options, Options::DatetimeField
 
     def stored_type
       :datetime

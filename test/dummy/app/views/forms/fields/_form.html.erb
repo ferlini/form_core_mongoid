@@ -53,17 +53,17 @@
   </div>
 
   <div class="field">
-    <%= f.label :type, class: "label" %>
+    <%= f.label :_type, class: "label" %>
     <div class="control">
       <span class="select">
-        <%= f.select :type, options_for_field_types(selected: field.class.to_s) %>
+        <%= f.select :_type, options_for_field_types(selected: field.class.to_s) %>
       </span>
     </div>
   </div>
 
   <div class="field">
     <div class="control">
-      <% Field.accessibilities.each do |k, _| %>
+      <% Field::ACCESSIBILITY.each do |k, _| %>
         <label class="radio">
           <%= f.radio_button :accessibility, k %>
           <%= Field.human_enum_value :accessibility, k %>

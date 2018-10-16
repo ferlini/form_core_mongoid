@@ -4,8 +4,6 @@ module FormCore
   class Form < ApplicationRecord
     include FormCore::Concerns::Models::Form
 
-    self.table_name = "forms"
-
     has_many :fields
   end
 end

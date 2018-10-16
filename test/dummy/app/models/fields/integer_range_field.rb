@@ -2,8 +2,8 @@
 
 module Fields
   class IntegerRangeField < Field
-    serialize :validations, Validations::IntegerRangeField
-    serialize :options, Options::IntegerRangeField
+    # serialize :validations, Validations::IntegerRangeField
+    # serialize :options, Options::IntegerRangeField
 
     def interpret_to(model, overrides: {})
       check_model_validity!(model)

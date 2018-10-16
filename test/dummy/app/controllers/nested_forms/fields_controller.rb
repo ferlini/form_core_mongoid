@@ -4,18 +4,18 @@ class NestedForms::FieldsController < NestedForms::ApplicationController
   before_action :set_field, only: %i[show edit update destroy]
 
   def index
-    @fields = @nested_form.fields.includes(:section).all
+    @fields = @nested_form.form_fields.includes(:section).all
   end
 
   def new
-    @field = @nested_form.fields.build
+    @field = @nested_form.form_fields.build
   end
 
   def edit
   end
 
   def create
-    @field = @nested_form.fields.build(field_params)
+    @field = @nested_form.form_fields.build(field_params)
 
     if @field.save
       redirect_to nested_form_fields_url(@nested_form), notice: "Field was successfully created."
@@ -41,7 +41,7 @@ class NestedForms::FieldsController < NestedForms::ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_field
-    @field = @nested_form.fields.find(params[:id])
+    @field = @nested_form.form_fields.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.
